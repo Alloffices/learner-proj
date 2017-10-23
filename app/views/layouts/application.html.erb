@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Developer Corner</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="shortcut icon" href="https://i.imgur.com/0ZyRo7L.png" />
+	<link href="https://fonts.googleapis.com/css?family=Yeseva+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+    <header id="notification-bar">
+      <% if notice %>
+        <div id="notice_wrapper" class="">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% elsif alert %>
+        <div id="notice_wrapper">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+    </header>
+
+    <%= yield %>
+  <div class="footer">
+  	<p>Developer Corner • 2017 
+      <% if user_signed_in? %>
+        • <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "logout_link") %>
+      <% else %>
+      <% end %>
+      </p>
+  </div>
+
+  <!-- Notification & Alert Fade Animation -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      setTimeout(function() {
+        $('#notification-bar').fadeOut("slow", function() {
+          $(this).remove();
+        });
+      }, 3500);
+    });
+  </script>
+
+  </body>
+</html>
